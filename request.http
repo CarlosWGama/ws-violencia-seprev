@@ -1,0 +1,28 @@
+
+@baseURL = http://localhost:8000/api
+@token = AJUSDYWQYJHNCSA4788145698AKSDIIUQWJ14ASDJUW1S
+
+POST {{baseURL}}/victim
+Content-Type: application/json
+HYSDTDWQI14784AJSUDWYQJSKDZLOZLZOZLASDHWQ1487AKK: {{token}}
+
+{
+    "name": "teste",
+    "genre": "M",
+    "place": "Casa",
+    "time": "10:00",
+    "complaint_id": 1
+}
+
+
+###
+POST {{baseURL}}/aggressor
+Content-Type: application/json
+HYSDTDWQI14784AJSUDWYQJSKDZLOZLZOZLASDHWQ1487AKK: {{token}}
+
+{
+    "relationship": "Primo",
+    "genre": "M",
+    "description": "Descrição...",
+    "complaint_id": 1
+}

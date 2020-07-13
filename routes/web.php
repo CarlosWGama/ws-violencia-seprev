@@ -16,20 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/index');
 });
 
-
 Route::get('/index', ['as' => 'index' , 'uses' => 'IndexController@index']);
-
 Route::get('/teste', ['as' => 'teste', 'uses' => 'IndexController@teste']);
-
 Route::post('/uploadteste', ['as' => 'uploadteste', 'uses' => 'IndexController@uploadteste']);
 
-
-
 // ROUTE TEST
-
 Route::get('/testeapi', ['as' => 'testeapi', 'uses' => 'IndexController@testeapi']);

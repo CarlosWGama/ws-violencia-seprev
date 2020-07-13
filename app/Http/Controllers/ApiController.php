@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Aggressor;
 use Illuminate\Http\Request;
 use App\AuthorReports;
 use App\Complaint;
 use App\Media;
 use App\Teste;
+use App\Victim;
 use App\ViolationType;
 use Exception;
+use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
@@ -97,14 +100,55 @@ class ApiController extends Controller
         }
     }
 
+    /**
+     * Salva dados do agressor
+     */
+    public function saveAggressor(Request $r) {
+
+        $validation = Validator::make($r->all(), [
+            'relationship'  => 'required',
+            'genre'         => 'required',
+            'description'   => 'required',
+            'complaint_id'  => 'required|integer',
+        ]);
+
+        //Falhou no envio
+        if ($validation->fails()) return response()->json($validation->errors(), 403);
+
+
+        $aggressor = Aggressor::create($r->all());
+        return response()->json($aggressor, 201);
+    }
+
+    /** 
+     * Salva dados da Vítima
+     */
+    public function saveVictim(Request $r) {
+
+        $validation = Validator::make($r->all(), [
+            'name'          => 'required',
+            'genre'         => 'required',
+            'place'         => 'required',
+            'time'          => 'required',
+            'complaint_id'  => 'required|integer',
+        ]);
+
+        //Falhou no envio
+        if ($validation->fails()) return response()->json($validation->errors(), 403);
+
+
+        $victim = Victim::create($r->all());
+        return response()->json($victim, 201);
+    }
+
     public function saveImage(Request $request)
     {
         try {
-            $getNameFile = date('D/M/Y') . date('h:i:s');
+
+	    $getNameFile = date('D/M/Y') . date('h:i:s');
             $getNameFile = str_replace(':', '-', $getNameFile);
             $getNameFile = str_replace('/', '-', $getNameFile);
             $media = new Media();
-        
 
             if ($request->hasFile('midia') && $request->file('midia')->isValid()) {
 
@@ -125,8 +169,11 @@ class ApiController extends Controller
                     $media->midia = $upload;
                     $media->save();
                 }
-                
+
             }
+            return $media;
+
+
         } catch (Exception $e) {
         }
     }
