@@ -1,4 +1,3 @@
-
 @baseURL = http://localhost:8000/api
 @token = AJUSDYWQYJHNCSA4788145698AKSDIIUQWJ14ASDJUW1S
 
@@ -11,7 +10,7 @@ HYSDTDWQI14784AJSUDWYQJSKDZLOZLZOZLASDHWQ1487AKK: {{token}}
     "genre": "M",
     "place": "Casa",
     "time": "10:00",
-    "complaint_id": 1
+    "complaint_id": 3
 }
 
 
@@ -24,5 +23,46 @@ HYSDTDWQI14784AJSUDWYQJSKDZLOZLZOZLASDHWQ1487AKK: {{token}}
     "relationship": "Primo",
     "genre": "M",
     "description": "Descrição...",
-    "complaint_id": 1
+    "complaint_id": 3
 }
+
+
+###
+POST {{baseURL}}/cadastro_autor
+Content-Type: application/json
+HYSDTDWQI14784AJSUDWYQJSKDZLOZLZOZLASDHWQ1487AKK: {{token}}
+
+{
+    "edtNome":  "Carlos",
+    "edtRg": "31391231",
+    "edtRua": "Rua C", 
+    "edtNumero": 99,
+    "edtBairro": "Centro",
+    "edtCidade": "Maceió",
+    "edtEstado": "Alagoas",
+    "edtPais": "Brasil",
+    "edtComplemento": "..."
+}
+
+###
+POST {{baseURL}}/cadastro_denuncia
+Content-Type: application/json
+HYSDTDWQI14784AJSUDWYQJSKDZLOZLZOZLASDHWQ1487AKK: {{token}}
+
+{
+    "id_violation_types": 2,
+    "id_author_reports": 1,
+    "classificacao": "testemunha",
+    "identificacao": "anonimo",
+    "grau_relacao": "Amigo",
+    "local_violacao": "local",
+    "estabelecimento": "Estabelecimento",
+    "data_violacao": "31/12/2019",
+    "descricao_violacao": "Descrição",
+    "midia_anexada": "Não",
+    "tipo_midia": 0,
+    "vinculo_institucional":"não", 
+    "tipo_instituicao":"Tipo instituição",
+    "instituicao": "instituicao"
+}
+

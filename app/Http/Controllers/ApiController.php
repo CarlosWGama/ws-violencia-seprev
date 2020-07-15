@@ -13,28 +13,23 @@ use App\ViolationType;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 
-class ApiController extends Controller
-{
-    public function author_reports()
-    {
+class ApiController extends Controller {
+    public function author_reports() {
         $authors = AuthorReports::all();
         return json_encode($authors);
     }
 
-    public function violation_types()
-    {
+    public function violation_types() {
         $violation_types = ViolationType::all();
         return json_encode($violation_types);
     }
 
-    public function complaints()
-    {
+    public function complaints() {
         $complaints = Complaint::all();
         return json_encode($complaints);
     }
 
-    public function saveAuthorReports(Request $r)
-    {
+    public function saveAuthorReports(Request $r) {
         $author = new AuthorReports();
         try {
             $author->nome = $r->edtNome;
@@ -61,8 +56,7 @@ class ApiController extends Controller
     }
 
 
-    public function saveComplaint(Request $r)
-    {
+    public function saveComplaint(Request $r) {
         // $media = new Media();
         $complaint = new Complaint();
         try {
@@ -141,45 +135,46 @@ class ApiController extends Controller
         return response()->json($victim, 201);
     }
 
-    public function saveImage(Request $request)
-    {
-        try {
+    public function saveImage(Request $request) {
 
-	    $getNameFile = date('D/M/Y') . date('h:i:s');
-            $getNameFile = str_replace(':', '-', $getNameFile);
-            $getNameFile = str_replace('/', '-', $getNameFile);
-            $media = new Media();
+        $validation = Validator::make($request->all(), [
+            // 'midia'         => 'file|required',
+            'complaint_id'  => 'required|integer',
+        ]);
 
-            if ($request->hasFile('midia') && $request->file('midia')->isValid()) {
+        //Falhou no envio
+        if ($validation->fails()) return response()->json($validation->errors(), 403);
 
-                // PRECISA ADICIONAR OS TIPOS DE ARQUIVOS QUE DEVEM SER PASSADOS AQUI
-                $extension = $request->midia->extension();
-                if ($extension == "jpeg" || $extension == "jpg") {
-                    $media->tipo_midia = "fotografia";
-                } else {
-                    $media->tipo_midia = "video";
-                }
-
+        $media = new Media();
+        if ($request->hasFile('midia') && $request->file('midia')->isValid()) {
             
-                $media->path_midia = $request->path_midia = "/storage/app/public/img";
-                $upload = $request->midia->storeAs('img', $getNameFile);
+            $media->complaint_id = $request->complaint_id;
 
-                $verificaExistente = Media::where('midia', $upload)->first();
-                if(!$verificaExistente == $upload){
-                    $media->midia = $upload;
-                    $media->save();
-                }
-
+            // PRECISA ADICIONAR OS TIPOS DE ARQUIVOS QUE DEVEM SER PASSADOS AQUI
+            $extension = $request->midia->extension();
+            if ($extension == "jpeg" || $extension == "jpg") {
+                $media->tipo_midia = "fotografia";
+            } else {
+                $media->tipo_midia = "video";
             }
-            return $media;
 
+            $media->path_midia = $request->path_midia = "/storage/app/public/img";
+            $media->save();
 
-        } catch (Exception $e) {
+            $getNameFile = 'media_' . $media->complaint_id . '_' .  $media->id . '.' . $extension;
+            $upload = $request->midia->storeAs('img', $getNameFile);
+
+            $verificaExistente = Media::where('midia', $upload)->first();
+            if(!$verificaExistente == $upload){
+                $media->midia = $getNameFile;
+                $media->save();
+            }
+
         }
+        return $media;      
     }
 
-    public function verifyConnection(Request $r)
-    {
+    public function verifyConnection(Request $r) {
         $resposta = "";
         try {
             $resposta = "OK";
