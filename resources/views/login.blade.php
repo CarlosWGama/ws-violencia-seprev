@@ -34,7 +34,7 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-        <div class="page-content--bge5">
+        <div class="page-content--bge5"  style="background-color:black">
             <div class="container">
                 <div class="login-wrap">
                     <div class="login-content">
@@ -65,30 +65,14 @@
                             </form>
                         </div>
                     </div>
+                    <div style="display:flex;align-items:center; justify-content:center">
+                        <img src="{{url('images/centro-inovacao.png')}}" width="200"/>
+                    <div/>
                 </div>
             </div>
         </div>
 
     </div>
-
-    
-    <script src="https://unpkg.com/blip-chat-widget" type="text/javascript">
-    </script>
-    <script>
-        (function () {
-            window.onload = function () {
-                new BlipChat()
-                .withAppKey('cXdlcXdlOjFhOWRlZDIxLWEyYmItNGQ1Ny1hODZjLTJlMTk2NWU5NDU2MA==')
-                .withButton({"color":"#2CC3D5","icon":""})
-                .withCustomCommonUrl('https://chat.blip.ai/')
-                .build();
-            }
-        })();
-    </script>
-                
-
-
-
 
     <!-- Jquery JS-->
     <script src="{{asset('others/jquery-3.2.1.min.js')}}"></script>
