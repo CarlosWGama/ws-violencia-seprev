@@ -20,8 +20,6 @@
         <!-- --------------------------- VITIMA ----------------------- -->
         <td>Nome da Vítima</td>
         <td>Gênero da Vítima</td>
-        <td>Local informado pela Vítima</td>
-        <td>Hora informada pela vítima</td>
         <!-- --------------------------- AGRESSOR ----------------------- -->
         <td>Parentesco do agressor com a vítima</td>
         <td>Gênero do agressor</td>
@@ -53,8 +51,6 @@
          <!-- --------------------------- VITIMA ----------------------- -->
          <td>@if(!empty($denuncia->vitima)){{$denuncia->vitima->name}}@endif</td>
          <td>@if(!empty($denuncia->vitima)){{($denuncia->vitima->genre == "M" ? "Masculino" : "Feminino")}}@endif</td>
-         <td>@if(!empty($denuncia->vitima)){{$denuncia->vitima->place}}@endif</td>
-         <td>@if(!empty($denuncia->vitima)){{$denuncia->vitima->time}}@endif</td>
          
          <!-- --------------------------- AGRESSOR ----------------------- -->
          <td>@if(!empty($denuncia->agressor)){{$denuncia->agressor->relationship}}@endif</td>

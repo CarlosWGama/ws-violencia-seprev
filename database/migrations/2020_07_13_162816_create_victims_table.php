@@ -18,8 +18,6 @@ class CreateVictimsTable extends Migration
 
             $table->string('name');
             $table->char('genre');
-            $table->string('place');
-            $table->string('time');
             $table->softDeletes();
 
             $table->unsignedBigInteger('complaint_id');

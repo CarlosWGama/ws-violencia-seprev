@@ -45,8 +45,6 @@
     <h2 class="secao">Dados da suposta vítima</h2>
     <p><b>Nome:</b> {{$denuncia->vitima->name}}</p>
     <p><b>Gênero:</b> {{($denuncia->vitima->genre == "M" ? "Masculino" : "Feminino")}}</p>
-    <p><b>Local:</b> {{$denuncia->vitima->place}}</p>
-    <p><b>Hora:</b> {{$denuncia->vitima->time}}</p>
     @endif
 
     @if(!empty($denuncia->agressor))

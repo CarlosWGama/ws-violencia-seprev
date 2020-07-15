@@ -118,18 +118,14 @@ class ApiController extends Controller {
      * Salva dados da Vítima
      */
     public function saveVictim(Request $r) {
-
         $validation = Validator::make($r->all(), [
             'name'          => 'required',
             'genre'         => 'required',
-            'place'         => 'required',
-            'time'          => 'required',
             'complaint_id'  => 'required|integer',
         ]);
 
         //Falhou no envio
         if ($validation->fails()) return response()->json($validation->errors(), 403);
-
 
         $victim = Victim::create($r->all());
         return response()->json($victim, 201);
