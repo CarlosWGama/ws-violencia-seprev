@@ -132,15 +132,14 @@ class ApiController extends Controller {
     }
 
     public function saveImage(Request $request) {
-
         $validation = Validator::make($request->all(), [
             // 'midia'         => 'file|required',
             'complaint_id'  => 'required|integer',
         ]);
-
+        
         //Falhou no envio
         if ($validation->fails()) return response()->json($validation->errors(), 403);
-
+        
         $media = new Media();
         if ($request->hasFile('midia') && $request->file('midia')->isValid()) {
             
