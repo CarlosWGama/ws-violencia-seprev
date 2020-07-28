@@ -18,9 +18,10 @@ class CreateMediaTable extends Migration
             $table->string("midia")->nullable();
             $table->string('tipo_midia');
             $table->string('path_midia');
+            $table->softDeletes();
 
             $table->unsignedBigInteger('complaint_id');
-            $table->foreign('complaint_id')->on('complaints')->references('id');
+            $table->foreign('complaint_id')->on('complaints')->references('id')->onDelete('cascade');
 
         });
     }

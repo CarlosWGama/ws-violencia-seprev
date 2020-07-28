@@ -21,7 +21,7 @@ class CreateAggressorsTable extends Migration
             $table->softDeletes();
 
             $table->unsignedBigInteger('complaint_id');
-            $table->foreign('complaint_id')->on('complaints')->references('id');
+            $table->foreign('complaint_id')->on('complaints')->references('id')->onDelete('cascade');
             
             $table->timestamps();
         });
